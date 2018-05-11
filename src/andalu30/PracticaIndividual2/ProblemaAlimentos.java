@@ -7,31 +7,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProblemaAlimentos {
+	private static List<Nutriente> nutrientes;
+	private static List<IngredienteActivo> ingredientesActivos;
+	private static Integer index;
+	
 
-	public static void main(String[] args) {
-		
-		String path = "./ficheros/alimentos.txt"; //Path del archivo con los datos iniciales del problema
-		
-		List<Nutriente> nutrientes = generaDatosInicialesNutrientes(path);
-		List<IngredienteActivo> ingredientesActivos = generaDatosInicialesIngredientesActivos(path);
-		
+
+	public static ProblemaAlimentos create(String pathDatos){
+		return new ProblemaAlimentos(pathDatos);
+	}
+	protected ProblemaAlimentos(String pathDatos){
+		super();
+		this.nutrientes = generaDatosInicialesNutrientes(pathDatos);
+		this.ingredientesActivos = generaDatosInicialesIngredientesActivos(pathDatos);
+		this.index = 0;
+	}
+
+
+	public static Integer getIndex(){
+		return index;
+	}
+
+	public static List<Nutriente> getNutrientesProblema(){
+		return nutrientes;
+	}
+
+	public static List<IngredienteActivo> getIngredientesActivosProblema(){
+		return ingredientesActivos;
+	}
+
+
+	public static void generadatosIniciales(String path){
+		generaDatosInicialesNutrientes(path);
+		generaDatosInicialesIngredientesActivos(path);
+
 		System.out.println("\tDEBUG:"+nutrientes);
 		System.out.println("\tDEBUG:"+ingredientesActivos);
 
-		//Check correlacion de los datos iniciales
+
 		if (nutrientes.size()!=ingredientesActivos.get(0).getCantidadNutrientes().size()) {
 			System.err.println("Se ha producido un error al cargar los datos iniciales. O faltan/sobran nutrientes o la cantidadNutrientes de los ingredientes no es correcta");
 			System.exit(-1);
 		}
-		
-	
 	}
 	
 	
-	
-	
-	
-	public static List<Nutriente> generaDatosInicialesNutrientes(String path){
+	private static List<Nutriente> generaDatosInicialesNutrientes(String path){
 		List<Nutriente> res = new ArrayList<>();
 		
 		try {
@@ -58,7 +79,7 @@ public class ProblemaAlimentos {
 		return res;
 	}
 	
-	public static List<IngredienteActivo> generaDatosInicialesIngredientesActivos(String path){
+	private static List<IngredienteActivo> generaDatosInicialesIngredientesActivos(String path){
 		List<IngredienteActivo> res = new ArrayList<>();
 				
 			try {
