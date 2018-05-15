@@ -5,36 +5,100 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ProblemaAlimentos {
+	private String path;
 	private static List<Nutriente> nutrientes;
 	private static List<IngredienteActivo> ingredientesActivos;
+	private static Double coste;
 	private static Integer index;
 	
 
+	//Constructores como en ProblemaMochila
+	public static ProblemaAlimentos create(String pathDatos, Double d, Integer index){
+		return new ProblemaAlimentos(pathDatos, d, index);
+	}
 
 	public static ProblemaAlimentos create(String pathDatos){
-		return new ProblemaAlimentos(pathDatos);
+		return new ProblemaAlimentos(pathDatos,0);
 	}
+
+
 	protected ProblemaAlimentos(String pathDatos){
 		super();
+		this.path = pathDatos;
 		this.nutrientes = generaDatosInicialesNutrientes(pathDatos);
 		this.ingredientesActivos = generaDatosInicialesIngredientesActivos(pathDatos);
+		this.coste = 0;
 		this.index = 0;
+	}
+	protected ProblemaAlimentos(String pathDatos, Double cost,  Integer i){
+		super();
+		this.path = pathDatos;
+		this.nutrientes = generaDatosInicialesNutrientes(pathDatos);
+		this.ingredientesActivos = generaDatosInicialesIngredientesActivos(pathDatos);
+		this.coste = cost;
+		this.index = i;
 	}
 
 
+	public static Integer getCoste(){
+		return coste;
+	}
 	public static Integer getIndex(){
 		return index;
 	}
-
 	public static List<Nutriente> getNutrientesProblema(){
 		return nutrientes;
 	}
-
 	public static List<IngredienteActivo> getIngredientesActivosProblema(){
 		return ingredientesActivos;
 	}
+
+
+	//Subproblema: Coste+a*costeIngrediente(index)
+	public ProblemaAlimentos getSubProblema(Integer a){
+		int index = this.getIndex();
+		return ProblemaAlimentos.create(this.path, this.coste+this.getIngredientesActivosProblema().get(index).getCoste()*a ,index+1);
+	}
+
+	public IntStream getAlternativas(){
+		IntStream r;
+
+		if(this.isFinal()){
+			r = IntStream.empty();
+		}else{
+			//TODO: Mejorar
+			r = IntStream.rangeClosed(0, 1000); //Se coje o 0 o un kilogramo.
+		}
+		return r;
+	}
+
+	public Integer getAlternativa(ProblemaMochila p) {
+		//TODO: WTF is this??? :'(
+		
+		Preconditions.checkArgument(esSubproblema(p));
+		int index1 = this.index;
+		int index2 = p.index;
+		Preconditions.checkArgument(index2-index1 == 1);
+			
+		return null;
+	}
+	
+
+	public boolean esSubproblema(ProblemaMochila p) {
+		int index1 = this.index;
+		int index2 = p.index;
+		if(index2-index1 != 1){
+			return false;
+		}else{
+		return true;
+		}
+	}
+
+
+
 
 
 	public static void generadatosIniciales(String path){
@@ -110,6 +174,24 @@ public class ProblemaAlimentos {
 			return res;	
 		}
 	
+
+
+		//Metodos equals toString hashCode
+		@Override
+		public boolean equals(Object obj) {
+			return super.equals(obj);
+		}
+
+		@Override
+		public String toString() {
+			return super.toString();
+		}
+
+		@Override
+		public int hashCode() {
+			return super.hashCode();
+		}
+
 	
 	
 	
