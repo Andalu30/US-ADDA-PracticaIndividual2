@@ -20,7 +20,7 @@
 
 \begin{itemize}
  \item Tipos:\\
- · S - List\textless Integer\textgreater (Lista con los gramos de cada ingrediente)\\
+ · S - SolucionAlimentos\\
  · A - Integer \in [0,1000] (El numero de gramos que se seleccionan de cada ingrediente)
 
  \item Propiedades compartidas:\\
@@ -68,14 +68,14 @@ contener una cantidad mínima de nutrientes concreta.
 \item Técnica:\\
       · Vuelta Atrás
 \item Tipos:\\
-      · S - List\textless Integer\textgreater (Lista con los gramos de cada ingrediente)\\
+      · S - SolucionAlimentos\\
       · A - Integer \in [0,1000] (El numero de gramos que se seleccionan de cada ingrediente)
 \item Propiedades compartidas:\\
       · nutrientes - List\textless Nutriente\textgreater - Lista con los ingredientes del problema\\
-      · ingredientesActivos - List\textless IngredienteActivo\textgreater - Lista con los ingredientes activos del problema
+      · ingredientesActivos - List\textless IngredienteActivo\textgreater - Lista con los ingredientes activos del problema\\
       · numeroAlimentos - Derivada - ingredientesActivos.size()
 \item Propiedades individuales del estado:\\
-      · index - Integer - Indice indicador del alimento por el que vamos
+      · index - Integer - Indice indicador del alimento por el que vamos\\
       · costeIngrediente - Derivada - ingredientesActivos.get(index).getCoste()
 \item Solución:\\
       · List\textless Integer\textgreater s (Lista de integers que indica la cantidad de gramos que se han seleccionado de cada ingrediente)
