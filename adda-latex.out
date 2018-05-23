@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Completar la ficha de descripción del problema}{}% 1
+\BOOKMARK [1][-]{section.2}{Resolver el problema por PD, para ello:}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Completar la ficha de descripcion de la solución mediante programacion dinámica.}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Escriba un archivo denominado `alimentos.txt' con los datos del escenario de entrada de forma similar a como se ha realizado en las clases de prácticas para otros problemas.}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Desarrolle un proyecto que resuelva el problema especificado por la técnica sin hacer uso en principio de una función de cota. Dicho proyecto debe incluir un test de prueba que genere la solución para el escenario previamente descrio en el enunciado.}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{El test de prueba debe generar el archivo "GrafoAlimentos.gv"\(grafo and/or relacionado de la busqueda llevada a cabo\) que debe entregar incluido en el proyecto y en la memoria.}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Modifique la solucion anterior para realizar una función de cota adecuada al problema a resolver. Ejecute de nuevo el test de prieba sobre el proyecto modificado e indique qué solución obtiene para el problema del escenario indicado previamente en el enunciado. el test de prueba debe generar el archivo "GrafoAlimentosFiltro.gv"que debe entregar incluido en el proyecto y en la memoria.}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Resolver el problema mediante BT, para ello:}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Completar la ficha de descripción de la solucion mediante BT.}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Desarrolle un proyecto que resuelva el problema especificado por técnica indicada sin hacer uso en principio de una función de cota. Dicho proyecto debe incluir un test de prieba que genere la solución para el escenario previamente descrito en el enunciado.}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Modifique la solucion anterior para realizar una función de cota adecuada al problema a resolver. Ejecute de nuevo el test de prueba sobre el proyecto modificado e indique qué solución obtiene para el prblema del escenario indicado previamente en el enunciado.}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Anexos}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Codigo completo}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Volcado de pantalla de los resultados obtenidos por cada prueba realizada}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{Código fuente y licencia}{section.4}% 15

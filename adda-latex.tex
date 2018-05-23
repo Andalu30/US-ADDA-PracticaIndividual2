@@ -73,19 +73,20 @@ contener una cantidad mínima de nutrientes concreta.
 \item Propiedades compartidas:\\
       · nutrientes - List\textless Nutriente\textgreater - Lista con los ingredientes del problema\\
       · ingredientesActivos - List\textless IngredienteActivo\textgreater - Lista con los ingredientes activos del problema\\
-      · numeroAlimentos - Derivada - ingredientesActivos.size()
+      · numeroIngredientes - Derivada - ingredientesActivos.size()
 \item Propiedades individuales del estado:\\
       · index - Integer - Indice indicador del alimento por el que vamos\\
       · costeIngrediente - Derivada - ingredientesActivos.get(index).getCoste()
 \item Solución:\\
       · List\textless Integer\textgreater s (Lista de integers que indica la cantidad de gramos que se han seleccionado de cada ingrediente)
-\item Tamaño:
+\item Tamaño:\\
+      · numeroIngredientes - index
 \item Alternativas:\\
       · A = {a \in [0,1000]}
 \item Instanciación:\\
       · (0,0)
 \item Estado final:\\
-      index == ingredientesActivos.size() \\Devuelve true si hemos llegado al último ingrediente
+      index == numeroIngredientes \\Devuelve true si hemos llegado al último ingrediente
 \item Avanza:\\
       (index,coste) -> (index+1, coste+a*costeIngrediente)
 \item Retrocede:\\
@@ -94,8 +95,8 @@ contener una cantidad mínima de nutrientes concreta.
       · $s() = sr(0,null)$\\
       · $sr(i, coste) =
       \begin{cases}
-      coste  &\mbox{index = numeroAlimentos}\\
-      sr(index+1, coste+a*costeIngrediente) &\mbox{index < numeroAlimentos}
+      coste  &\mbox{index = numeroIngredientes}\\
+      sr(index+1, coste+a*costeIngrediente) &\mbox{index < numeroIngredientes}
       \end{cases}$
 
 \item Objetivo:\\

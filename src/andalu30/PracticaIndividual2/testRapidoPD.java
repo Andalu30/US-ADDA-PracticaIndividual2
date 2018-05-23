@@ -1,6 +1,6 @@
 package andalu30.PracticaIndividual2;
 
-public class testRapido{
+public class testRapidoPD{
 
     public static void main(String[] args) {
 

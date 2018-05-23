@@ -13,7 +13,6 @@ public class ProblemaAlimentos {
 	private static List<IngredienteActivo> ingredientesActivos;
 	private static Double coste;
 	private static Integer index;
-	
 
 	//Constructores como en ProblemaMochila
 	public static ProblemaAlimentos create(String pathDatos, Double d, Integer index){
@@ -21,7 +20,7 @@ public class ProblemaAlimentos {
 	}
 
 	public static ProblemaAlimentos create(String pathDatos){
-		return new ProblemaAlimentos(pathDatos,0);
+		return new ProblemaAlimentos(pathDatos);
 	}
 
 
