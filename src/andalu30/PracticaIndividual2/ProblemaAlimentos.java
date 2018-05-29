@@ -5,49 +5,29 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
+
 
 public class ProblemaAlimentos {
-	private String path;
 	private static List<Nutriente> nutrientes;
 	private static List<IngredienteActivo> ingredientesActivos;
-	private static Double coste;
-	private static Integer index;
 
-	//Constructores como en ProblemaMochila
-	public static ProblemaAlimentos create(String pathDatos, Double d, Integer index){
-		return new ProblemaAlimentos(pathDatos, d, index);
-	}
-
-	public static ProblemaAlimentos create(String pathDatos){
-		return new ProblemaAlimentos(pathDatos);
-	}
-
-
-	protected ProblemaAlimentos(String pathDatos){
+	
+	public ProblemaAlimentos() {
 		super();
-		this.path = pathDatos;
-		this.nutrientes = generaDatosInicialesNutrientes(pathDatos);
-		this.ingredientesActivos = generaDatosInicialesIngredientesActivos(pathDatos);
-		this.coste = 0;
-		this.index = 0;
 	}
-	protected ProblemaAlimentos(String pathDatos, Double cost,  Integer i){
-		super();
-		this.path = pathDatos;
-		this.nutrientes = generaDatosInicialesNutrientes(pathDatos);
-		this.ingredientesActivos = generaDatosInicialesIngredientesActivos(pathDatos);
-		this.coste = cost;
-		this.index = i;
+	
+	public static ProblemaAlimentos create() {
+		return new ProblemaAlimentos();
 	}
+	
+	public static ProblemaAlimentos create(String path) {
+		ProblemaAlimentos pa = new ProblemaAlimentos();
+		pa.generadatosIniciales(path);
+		return pa;
+	}
+	
 
 
-	public static Integer getCoste(){
-		return coste;
-	}
-	public static Integer getIndex(){
-		return index;
-	}
 	public static List<Nutriente> getNutrientesProblema(){
 		return nutrientes;
 	}
@@ -56,57 +36,19 @@ public class ProblemaAlimentos {
 	}
 
 
-	//Subproblema: Coste+a*costeIngrediente(index)
-	public ProblemaAlimentos getSubProblema(Integer a){
-		int index = this.getIndex();
-		return ProblemaAlimentos.create(this.path, this.coste+this.getIngredientesActivosProblema().get(index).getCoste()*a ,index+1);
-	}
 
-	public IntStream getAlternativas(){
-		IntStream r;
 
-		if(this.isFinal()){
-			r = IntStream.empty();
-		}else{
-			//TODO: Mejorar
-			r = IntStream.rangeClosed(0, 1000); //Se coje o 0 o un kilogramo.
-		}
-		return r;
-	}
 
-	public Integer getAlternativa(ProblemaMochila p) {
-		//TODO: WTF is this??? :'(
-		
-		Preconditions.checkArgument(esSubproblema(p));
-		int index1 = this.index;
-		int index2 = p.index;
-		Preconditions.checkArgument(index2-index1 == 1);
-			
-		return null;
-	}
+
+	
+	
+	
 	
 
-	public boolean esSubproblema(ProblemaMochila p) {
-		int index1 = this.index;
-		int index2 = p.index;
-		if(index2-index1 != 1){
-			return false;
-		}else{
-		return true;
-		}
-	}
 
-
-
-
-
-	public static void generadatosIniciales(String path){
-		generaDatosInicialesNutrientes(path);
-		generaDatosInicialesIngredientesActivos(path);
-
-		System.out.println("\tDEBUG:"+nutrientes);
-		System.out.println("\tDEBUG:"+ingredientesActivos);
-
+	public void generadatosIniciales(String path){
+		this.nutrientes = generaDatosInicialesNutrientes(path);
+		this.ingredientesActivos = generaDatosInicialesIngredientesActivos(path);
 
 		if (nutrientes.size()!=ingredientesActivos.get(0).getCantidadNutrientes().size()) {
 			System.err.println("Se ha producido un error al cargar los datos iniciales. O faltan/sobran nutrientes o la cantidadNutrientes de los ingredientes no es correcta");
@@ -170,9 +112,9 @@ public class ProblemaAlimentos {
 			} catch (Exception e) {
 				System.err.println("Se ha producido un error al inicializar los datos de los ingredientes activos: "+e.getMessage());
 			}
-			return res;	
+			return res;
 		}
-	
+
 
 
 		//Metodos equals toString hashCode

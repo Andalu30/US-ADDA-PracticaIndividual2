@@ -37,11 +37,80 @@ contener una cantidad mínima de nutrientes concreta.
 \item Restricciones:
 
 \item Solución óptima:\\
+      min coste
+
+
+
+
 
 
 \end{itemize}
 \section{Resolver el problema por PD, para ello:}
 \subsection{Completar la ficha de descripcion de la solución mediante programacion dinámica.}
+\begin{itemize}
+  \item Problema:\\
+        · Problema de los alimentos
+  \item Descripción: \\
+  · Determinar cuantos gramos de cada ingrediente activo es necesario incluir por kilo
+  de alimento para minimizar costes, teniendo en cuenta que cada kilo de alimento debe
+  contener una cantidad mínima de nutrientes concreta.
+  \item Técnica:\\
+        · Programacion dinámica
+  \item Tipos:\\
+        · S - SolucionAlimentos\\
+        · A - Integer \in [0,1000] (El numero de gramos que se seleccionan de cada ingrediente)
+  \item Propiedades compartidas:\\
+        · nutrientes - List\textless Nutriente\textgreater - Lista con los ingredientes del problema\\
+        · ingredientesActivos - List\textless IngredienteActivo\textgreater - Lista con los ingredientes activos del problema\\
+        · numeroIngredientes - Derivada - ingredientesActivos.size()
+  \item Propiedades individuales:\\
+        · a - Alternativa elegida\\
+        · index - Integer - Indice indicador del alimento por el que vamos\\
+        · costeIngrediente - Derivada - ingredientesActivos.get(index).getCoste()
+  \item Solución:\\
+        · SolucionAlimentos
+  \item Tamaño:\\
+        · numeroIngredientes - index
+  \item Solucion parcial:\\
+        · (a, c)\\
+        Donde: a es la alternativa y c el coste acumulado
+  \item Objetivo:\\
+        · min c
+  \item Alternativas:\\
+        · A = {a \in [0,1000]}
+  \item Instanciación:\\
+        · (0,0)
+  \item ProblemaGeneralizado:\\
+        · (i,j)
+  \item Caso base:
+        · i=numeroIngredientes
+  \item Solución casos base:
+        · (?, j+a*costeIngrediente)
+  \item Numero de subproblemas:
+        · 1000
+  \item Subproblemas:
+        · $p = (i,j) \rightarrow p_1 = (i+1, j+a*costeIngrediente)$
+  \item Esquema recursivo:\\
+        · sr(i, coste) =
+
+        $\begin{cases}
+        (?,0)  &\mbox{i = numeroIngredientes}\\
+        sA(cS, sp(p_a)) &\mbox{e.c.o.c}\\
+
+        \end{cases}$
+
+  \item sA:\\
+        · sA(A, (a',v')) = (A,v')
+  \item sP:\\
+        · Elegir la alternativa con menor coste.
+  \item Solucion reconstruida:
+  \item Complejidad:
+
+
+\end{itemize}
+
+
+
 
 \subsection{Escriba un archivo denominado `alimentos.txt' con los datos del escenario de entrada de forma similar a como se ha realizado en las clases de prácticas para otros problemas.}
 A continuacion se incluye el archivo con los datos iniciales del problema propuesto en el enunciado de la práctica individual.
@@ -78,7 +147,7 @@ contener una cantidad mínima de nutrientes concreta.
       · index - Integer - Indice indicador del alimento por el que vamos\\
       · costeIngrediente - Derivada - ingredientesActivos.get(index).getCoste()
 \item Solución:\\
-      · List\textless Integer\textgreater s (Lista de integers que indica la cantidad de gramos que se han seleccionado de cada ingrediente)
+      · SolucionAlimentos
 \item Tamaño:\\
       · numeroIngredientes - index
 \item Alternativas:\\

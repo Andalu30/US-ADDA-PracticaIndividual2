@@ -20,6 +20,7 @@ public class SolucionAlimentos implements SolucionBT{
 	}
 	
 	public List<Integer> getGramos(){
+
 		return this.gramos;
 	}
 
