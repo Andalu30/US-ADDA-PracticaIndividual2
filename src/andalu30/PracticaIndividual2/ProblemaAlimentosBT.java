@@ -44,7 +44,6 @@ public class ProblemaAlimentosBT implements EstadoBT<SolucionAlimentos,Integer>{
 	private Integer numeroIngredientes;
 	
 	private List<Integer> memoriaAlternativas; //Lista con las alternativas que hemos cogido (Los gramos).
-	//private List<Double> memoriaNutientes; //Cantidad total de nutrientes segun la alternativa del ingrediente que hayamos seleccionado.
 	private List<Double> minimos;
 	
 	
@@ -102,11 +101,10 @@ public class ProblemaAlimentosBT implements EstadoBT<SolucionAlimentos,Integer>{
 		
 		//Reducimos los mimimos (nutrientes)
 		for (int i = 0; i < this.listNutriente.size(); i++) {
+			
 			this.minimos.set(i, this.minimos.get(i)-a*this.listIngredientesActivos.get(index).getCantidadNutrientes().get(i));
 		}
-				
-		System.out.println(minimos);
-		
+						
 		this.index++;
 		return this;
 	}
@@ -150,12 +148,12 @@ public class ProblemaAlimentosBT implements EstadoBT<SolucionAlimentos,Integer>{
 		for (Integer alt : this.memoriaAlternativas) {
 			ls.add(alt);
 		}
-		//Solucion nula si no se cumplen las caracteristicas (contador.)		
+		//Solucion nula si no se cumplen las caracteristicas
 		
 		if (this.minimos.stream().anyMatch(x -> x>0.)) {
 			return null;
 		}else {			
-			return SolucionAlimentos.create(ls);
+			return SolucionAlimentos.create(ls, this.listIngredientesActivos);
 		}
 	}
 

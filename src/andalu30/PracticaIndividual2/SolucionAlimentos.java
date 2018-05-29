@@ -7,16 +7,18 @@ import us.lsi.bt.SolucionBT;
 
 public class SolucionAlimentos implements SolucionBT{
 
-	public static SolucionAlimentos create(List<Integer> gramos) {
-		return new SolucionAlimentos(gramos);
+	public static SolucionAlimentos create(List<Integer> gramos, List<IngredienteActivo> lsIngredientes) {
+		return new SolucionAlimentos(gramos,lsIngredientes);
 	}
 	
 	private List<Integer> gramos;
+	private List<IngredienteActivo> ingredientes;
 	
 	
-	private SolucionAlimentos(List<Integer> gramos) {
+	private SolucionAlimentos(List<Integer> gramos,List<IngredienteActivo> ingr) {
 		super();
 		this.gramos = gramos;
+		this.ingredientes = ingr;
 	}
 	
 	public List<Integer> getGramos(){
@@ -26,9 +28,14 @@ public class SolucionAlimentos implements SolucionBT{
 
 	
 	@Override
-	//Objetivo aleatorio en verdad, no veo en que afecta
 	public Double getObjetivo() {
-		return new Double(this.gramos.stream().max(Comparator.naturalOrder()).orElse(0));
+		Double res = 0.;
+		
+		for (int i = 0; i < this.gramos.size(); i++) {
+			res += this.gramos.get(i)*this.ingredientes.get(i).getCoste();
+		}
+		
+		return res;
 	}
 	
 	
@@ -36,7 +43,5 @@ public class SolucionAlimentos implements SolucionBT{
 	public String toString() {
 		return "SolucionAlimentos [gramos=" + gramos + "]";
 	}
-
-	
 	
 }

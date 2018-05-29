@@ -8,6 +8,7 @@ import us.lsi.bt.AlgoritmoBT;
 
 public class TestAlimentosBT {
 
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		AlgoritmoBT.calculaMetricas();
 		AlgoritmoBT.numeroDeSoluciones = 1;

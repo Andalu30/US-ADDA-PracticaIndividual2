@@ -46,6 +46,7 @@ public class ProblemaAlimentos {
 	
 
 
+	@SuppressWarnings("static-access")
 	public void generadatosIniciales(String path){
 		this.nutrientes = generaDatosInicialesNutrientes(path);
 		this.ingredientesActivos = generaDatosInicialesIngredientesActivos(path);
