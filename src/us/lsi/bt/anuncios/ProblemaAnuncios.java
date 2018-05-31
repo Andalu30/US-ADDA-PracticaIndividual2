@@ -20,6 +20,7 @@ public class ProblemaAnuncios {
 		super();
 	}
 	
+	
 	public static void leeYOrdenaAnuncios(String file){	
 		List<String> ls = Stream2.fromFile(file).toList();
 		int index = ls.indexOf("#");

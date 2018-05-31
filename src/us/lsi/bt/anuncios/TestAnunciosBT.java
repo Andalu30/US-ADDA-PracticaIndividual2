@@ -11,7 +11,7 @@ public class TestAnunciosBT {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ProblemaAnuncios.leeYOrdenaAnuncios(AbstractAlgoritmo.raiz+"anuncios.txt");
+		ProblemaAnuncios.leeYOrdenaAnuncios("/ficheros/anuncios.txt");
 		ProblemaAnuncios.tiempoTotal = 30;
 		AlgoritmoBT.numeroDeSoluciones = 6;
 		AlgoritmoBT.conFiltro = true;

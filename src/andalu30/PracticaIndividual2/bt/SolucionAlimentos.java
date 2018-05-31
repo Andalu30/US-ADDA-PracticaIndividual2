@@ -1,19 +1,19 @@
-package andalu30.PracticaIndividual2;
+package andalu30.PracticaIndividual2.bt;
 
-import java.util.Comparator;
 import java.util.List;
 
+import andalu30.PracticaIndividual2.common.IngredienteActivo;
 import us.lsi.bt.SolucionBT;
 
 public class SolucionAlimentos implements SolucionBT{
+	//Propiedades
+	private List<Integer> gramos;
+	private List<IngredienteActivo> ingredientes;
 
+	//Constructor
 	public static SolucionAlimentos create(List<Integer> gramos, List<IngredienteActivo> lsIngredientes) {
 		return new SolucionAlimentos(gramos,lsIngredientes);
 	}
-	
-	private List<Integer> gramos;
-	private List<IngredienteActivo> ingredientes;
-	
 	
 	private SolucionAlimentos(List<Integer> gramos,List<IngredienteActivo> ingr) {
 		super();
@@ -21,8 +21,8 @@ public class SolucionAlimentos implements SolucionBT{
 		this.ingredientes = ingr;
 	}
 	
+	//Getters
 	public List<Integer> getGramos(){
-
 		return this.gramos;
 	}
 
@@ -34,7 +34,6 @@ public class SolucionAlimentos implements SolucionBT{
 		for (int i = 0; i < this.gramos.size(); i++) {
 			res += this.gramos.get(i)*this.ingredientes.get(i).getCoste();
 		}
-		
 		return res;
 	}
 	
