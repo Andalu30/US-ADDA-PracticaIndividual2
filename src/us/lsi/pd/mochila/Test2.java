@@ -12,7 +12,7 @@ public class Test2 {
 
 	public static void main(String[] args) {
 		
-		ProblemaMochilaPD  p = ProblemaMochilaPD.create(AbstractAlgoritmo.raiz+"objetosmochila.txt", 78);		
+		ProblemaMochilaPD  p = ProblemaMochilaPD.create("ficheros/objetosMochila.txt", 78);		
 		AlgoritmoPD.isRandomize = false;
 		AlgoritmoPD.conFiltro = true;
 		AbstractAlgoritmo.calculaMetricas();
@@ -26,7 +26,7 @@ public class Test2 {
 //		System.out.println(p1.getCotaValor(60));	
 		a.showAllGraph(ruta+"pruebaMochilaSinFiltro.gv","Mochila",p);
 		System.out.println("Solucion= "+SolucionMochila.create(a.getSolucion(p)));
-		System.out.println(AbstractAlgoritmo.metricas);
+		//System.out.println(AbstractAlgoritmo.metricas);
 	}
 
 }

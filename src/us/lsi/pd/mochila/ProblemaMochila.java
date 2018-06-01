@@ -35,10 +35,10 @@ public class ProblemaMochila {
 	public static Integer capacidadInicial;
 
 	/**
-	 * El método lee el fichero de entrada y actualiza la lista ObjetosDisponibles que queda ordenada 
-	 * según el orden natural de los objetos 
+	 * El mï¿½todo lee el fichero de entrada y actualiza la lista ObjetosDisponibles que queda ordenada 
+	 * segï¿½n el orden natural de los objetos 
 	 * 
-	 * @param fichero Fichero que contiene las propiedades de los objetos disponibles. Un objeto por línea
+	 * @param fichero Fichero que contiene las propiedades de los objetos disponibles. Un objeto por lï¿½nea
 	 */
 	public static void leeObjetosDisponibles(String fichero) {
 		ordenObjetos = Comparator.reverseOrder();
@@ -56,6 +56,9 @@ public class ProblemaMochila {
 		return ordenObjetos;
 	}	
 	
+	
+	
+	
 	public static ProblemaMochila create(Integer capacidad, Integer index) {
 		return new ProblemaMochila(capacidad, index);
 	}
@@ -64,9 +67,17 @@ public class ProblemaMochila {
 		return new ProblemaMochila(ProblemaMochila.capacidadInicial, 0);
 	}
 	
+	
+	
+	
+	
 	private Integer capacidad;	
 	private Integer index;
 
+	
+	
+	
+	
 	protected ProblemaMochila() {
 		super();
 		this.capacidad = ProblemaMochila.capacidadInicial;
@@ -79,6 +90,11 @@ public class ProblemaMochila {
 		this.index = index;
 	}
 
+	
+	
+	
+	
+	
 	public Integer getCapacidad() {
 		return capacidad;
 	}
@@ -110,7 +126,7 @@ public class ProblemaMochila {
 	/**
 	 * @param index Indice del problema this
 	 * @param capacidad Capacidad del problema this
-	 * @return Número entero de unidades del objeto que está en la posición index que caben en un mochila de la capacidad dada
+	 * @return Nï¿½mero entero de unidades del objeto que estï¿½ en la posiciï¿½n index que caben en un mochila de la capacidad dada
 	 */
 	public static Integer numeroEnteroMaximoDeUnidades(Integer index, Integer capacidad){	
 		return Math.min(capacidad/ProblemaMochila.getPesoObjeto(index), ProblemaMochila.getNumMaxDeUnidades(index)) ;	
@@ -119,14 +135,21 @@ public class ProblemaMochila {
 	/**
 	 * @param index Indice del problema this
 	 * @param capacidad Capacidad del problema this
-	 * @return Número real de unidades del objeto que está en la posición index que caben en un mochila de la capacidad dada
+	 * @return Nï¿½mero real de unidades del objeto que estï¿½ en la posiciï¿½n index que caben en un mochila de la capacidad dada
 	 */
 	public static Double numeroRealMaximoDeUnidades(Integer index, Double capacidad){	
 		return Math.min(capacidad/ProblemaMochila.getPesoObjeto(index), ProblemaMochila.getNumMaxDeUnidades(index)) ;	
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 	/**
-	 * @pre a está contenida en getAlternativas()
+	 * @pre a estï¿½ contenida en getAlternativas()
 	 * @param a Alterantiva escogida
 	 * @return Subproblema de this si se escoge la alternativa a.
 	 */
@@ -196,7 +219,7 @@ public class ProblemaMochila {
 	}
 		
 	/**
-	 * @return Una cota superior del valor de la solución del problema this
+	 * @return Una cota superior del valor de la soluciï¿½n del problema this
 	 */
 	public Integer getCotaSuperiorValorEstimado(){
 		Double r = 0.;
@@ -214,9 +237,9 @@ public class ProblemaMochila {
 	}
 	
 	/**
-	 * @pre a está contenida en getAlternativas()
+	 * @pre a estï¿½ contenida en getAlternativas()
 	 * @param a Una alternativa de this
-	 * @return Una cota superior del valor de la solución del problema this si se escoge la alternativa a
+	 * @return Una cota superior del valor de la soluciï¿½n del problema this si se escoge la alternativa a
 	 */
 	public Integer getCotaSuperiorValorEstimado(Integer a){
 		Double r = 0.;
@@ -233,7 +256,7 @@ public class ProblemaMochila {
 		return (int)Math.ceil(r);
 	}
 	/**
-	 * @return Una cota inferior del valor de la solución del problema this
+	 * @return Una cota inferior del valor de la soluciï¿½n del problema this
 	 */
 	public Integer getCotaInferiorValorEstimado() {
 		Integer r = 0;
@@ -250,9 +273,9 @@ public class ProblemaMochila {
 		return (int)Math.ceil(r);
 	}
 	/**
-	 * @pre a está contenida en getAlternativas()
+	 * @pre a estï¿½ contenida en getAlternativas()
 	 * @param a Una alternativa de this
-	 * @return Una cota inferior del valor de la solución del problema this si se escoge la alternativa a
+	 * @return Una cota inferior del valor de la soluciï¿½n del problema this si se escoge la alternativa a
 	 */
 	public Integer getCotaInferiorValorEstimado(Integer a) {
 		Integer r = 0;
@@ -307,9 +330,9 @@ public class ProblemaMochila {
 	}
 	
 	/**
-	 * @param s Una posible solución
-	 * @return s es una solcuión de this si su peso es menor que la capacidad de la mochila y el número de unidades de
-	 * cada objeto menor o igual que el número máximo de unidades permitido
+	 * @param s Una posible soluciï¿½n
+	 * @return s es una solcuiï¿½n de this si su peso es menor que la capacidad de la mochila y el nï¿½mero de unidades de
+	 * cada objeto menor o igual que el nï¿½mero mï¿½ximo de unidades permitido
 	 */
 	public boolean isSolucion(SolucionMochila s){
 		boolean r = s.getPeso() <= this.getCapacidad();

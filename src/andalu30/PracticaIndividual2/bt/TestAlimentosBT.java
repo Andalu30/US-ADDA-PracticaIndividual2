@@ -25,8 +25,11 @@ public class TestAlimentosBT {
 		ProblemaAlimentosBT p = ProblemaAlimentosBT.create(pa);
 		AlgoritmoBT<SolucionAlimentos, Integer> a = Algoritmos.createBT(p);
 		
-
-		System.out.println("Ejecutando el algoritmo: Por favor, espere.");
+		if (AlgoritmoBT.conFiltro==true) {
+			System.out.println("Ejecutando el algoritmo con cota: Por favor, espere.");
+		}else {
+			System.out.println("Ejecutando el algoritmo: Por favor, espere.");			
+		}
 		a.ejecuta();
 
 		

@@ -7,9 +7,18 @@
 \BOOKMARK [2][-]{subsection.2.5}{Modifique la solucion anterior para realizar una función de cota adecuada al problema a resolver. Ejecute de nuevo el test de prieba sobre el proyecto modificado e indique qué solución obtiene para el problema del escenario indicado previamente en el enunciado. el test de prueba debe generar el archivo "GrafoAlimentosFiltro.gv"que debe entregar incluido en el proyecto y en la memoria.}{section.2}% 7
 \BOOKMARK [1][-]{section.3}{Resolver el problema mediante BT, para ello:}{}% 8
 \BOOKMARK [2][-]{subsection.3.1}{Completar la ficha de descripción de la solucion mediante BT.}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.2}{Desarrolle un proyecto que resuelva el problema especificado por técnica indicada sin hacer uso en principio de una función de cota. Dicho proyecto debe incluir un test de prieba que genere la solución para el escenario previamente descrito en el enunciado.}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Desarrolle un proyecto que resuelva el problema especificado por técnica indicada sin hacer uso en principio de una función de cota. Dicho proyecto debe incluir un test de prueba que genere la solución para el escenario previamente descrito en el enunciado.}{section.3}% 10
 \BOOKMARK [2][-]{subsection.3.3}{Modifique la solucion anterior para realizar una función de cota adecuada al problema a resolver. Ejecute de nuevo el test de prueba sobre el proyecto modificado e indique qué solución obtiene para el prblema del escenario indicado previamente en el enunciado.}{section.3}% 11
 \BOOKMARK [1][-]{section.4}{Anexos}{}% 12
-\BOOKMARK [2][-]{subsection.4.1}{Codigo completo}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.2}{Volcado de pantalla de los resultados obtenidos por cada prueba realizada}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.3}{Código fuente y licencia}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Paquete andalu30.PracticaIndividual2.common}{section.4}% 13
+\BOOKMARK [3][-]{subsubsection.4.1.1}{IngredienteActivo.java}{subsection.4.1}% 14
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Nutriente.java}{subsection.4.1}% 15
+\BOOKMARK [3][-]{subsubsection.4.1.3}{ProblemaAlimentos.java}{subsection.4.1}% 16
+\BOOKMARK [2][-]{subsection.4.2}{Paquete andalu30.PracticaIndividual2.pd}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.3}{Paquete andalu30.PracticaIndividual2.bt}{section.4}% 18
+\BOOKMARK [3][-]{subsubsection.4.3.1}{ProblemaAlimentosBT.java}{subsection.4.3}% 19
+\BOOKMARK [3][-]{subsubsection.4.3.2}{TestAlimentosBT.java}{subsection.4.3}% 20
+\BOOKMARK [2][-]{subsection.4.4}{Volcado de pantalla de los resultados obtenidos por cada prueba realizada}{section.4}% 21
+\BOOKMARK [3][-]{subsubsection.4.4.1}{PD}{subsection.4.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.4.2}{BT}{subsection.4.4}% 23
+\BOOKMARK [2][-]{subsection.4.5}{Código fuente y licencia}{section.4}% 24

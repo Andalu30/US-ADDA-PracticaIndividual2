@@ -1,11 +1,11 @@
 package andalu30.PracticaIndividual2.bt;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
 import andalu30.PracticaIndividual2.common.IngredienteActivo;
 import andalu30.PracticaIndividual2.common.Nutriente;
 import andalu30.PracticaIndividual2.common.ProblemaAlimentos;
@@ -132,4 +132,24 @@ public class ProblemaAlimentosBT implements EstadoBT<SolucionAlimentos,Integer>{
 		return "ProblemaAlimentosBT [index=" + index + ", listIngredientesActivos=" + listIngredientesActivos
 				+ ", listNutriente=" + listNutriente + "]";
 	}	
+	
+	
+	
+	
+	
+	
+	//Con cota.
+	public Double getObjetivoEstimado(Integer a) {
+		return this.minimos.stream().min(Comparator.naturalOrder()).orElse(0.)+ cota(a);
+		
+	}
+	
+	public Double cota(Integer a) {
+		return new Double(a*this.listIngredientesActivos.get(index).getCoste());
+	}
+	
+	
+	
+	
+	
 }
