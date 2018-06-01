@@ -33,9 +33,12 @@ de alimento para minimizar costes, teniendo en cuenta que cada kilo de alimento 
 contener una cantidad mínima de nutrientes concreta.
 
 \item Propiedades:\\
-
-\item Restricciones:
-
+  · listaIngredientes\\
+  · listaNutrientes\\
+  · minimos
+  
+\item Restricciones:\\
+  · minimos.stream().allMatch(x -> x<0.)
 \item Solución óptima:\\
       min coste
 
@@ -145,17 +148,18 @@ contener una cantidad mínima de nutrientes concreta.
       · numeroIngredientes - Derivada - ingredientesActivos.size()
 \item Propiedades individuales del estado:\\
       · index - Integer - Indice indicador del alimento por el que vamos\\
-      · costeIngrediente - Derivada - ingredientesActivos.get(index).getCoste()
+      · memoriaAlternativas - List\textless Integer\textgreater - Lista con las alternativas que hemos seleccionado hasta este estado.\\
+      · minimos - List\textless Double\textgreater - Memoria que se inicializa con los minimos que hay que cumplir y se va restando. Si todo es <0 se han cumplido los minmos.
 \item Solución:\\
       · SolucionAlimentos
 \item Tamaño:\\
       · numeroIngredientes - index
 \item Alternativas:\\
-      · A = {a \in [0,1000]}
+      · A = {a \in [1,1000]}
 \item Instanciación:\\
       · (0,0)
 \item Estado final:\\
-      index == numeroIngredientes \\Devuelve true si hemos llegado al último ingrediente
+      index == numeroIngredientes (Devuelve true si hemos llegado al último ingrediente)
 \item Avanza:\\
       (index,coste) -> (index+1, coste+a*costeIngrediente)
 \item Retrocede:\\
@@ -175,36 +179,71 @@ contener una cantidad mínima de nutrientes concreta.
 \end{itemize}
 
 
-\subsection{Desarrolle un proyecto que resuelva el problema especificado por técnica indicada sin hacer uso en principio de una función de cota. Dicho proyecto debe incluir un test de prieba que genere la solución para el escenario previamente descrito en el enunciado.}
-El codigo correspondiente con este ejercicio se puede ver en el Anexo.
+\subsection{Desarrolle un proyecto que resuelva el problema especificado por técnica indicada sin hacer uso en principio de una función de cota. Dicho proyecto debe incluir un test de prueba que genere la solución para el escenario previamente descrito en el enunciado.}
+El código fuente que resuelve este ejercicio se encuentra disponible en el anexo. En concreto, se trataria de el paquete andalu30.PracticaIndividual2.bt.
+Tambien se puede encontrar un volcado de pantalla de la salida de la consola al ejecutar la clase TestAlimentosBT, en la figura que se encuentra en la página \pageref{fig:btsincota}.
 \subsection{Modifique la solucion anterior para realizar una función de cota adecuada al problema a resolver. Ejecute de nuevo el test de prueba sobre el proyecto modificado e indique qué solución obtiene para el prblema del escenario indicado previamente en el enunciado.}
 Al igual que en el apartado anterior, el código fuente de este ejercicio se encuentra disponible en el anexo.
+Para ejecutar el algoritmo teniendo en cuenta la cota es necesario especificarlo en la clase TestAlimentosBT con:
+\begin{verbatim}
+  AlgoritmoBT.conFiltro = true;
+  AlgoritmoBT.isRandomize = true;
+\end{verbatim}
+Se puede encontrar el volcado de pantalla de esta solucion en la figura de la página \pageref{fig:btconcota}.
 
 \section{Anexos}
-\subsection{Codigo completo}
+\subsection{Paquete andalu30.PracticaIndividual2.common}
 \subsubsection{IngredienteActivo.java}
-\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/IngredienteActivo.java}
+\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/common/IngredienteActivo.java}
 \subsubsection{Nutriente.java}
-\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/Nutriente.java}
+\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/common/Nutriente.java}
 \subsubsection{ProblemaAlimentos.java}
-\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/ProblemaAlimentos.java}
-\subsubsection{ProblemaAlimentosPD.java}
-\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/ProblemaAlimentosPD.java}
-\subsubsection{TestAlimentosPD.java}
+\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/common/ProblemaAlimentos.java}
 
+\subsection{Paquete andalu30.PracticaIndividual2.pd}
+
+
+
+\subsection{Paquete andalu30.PracticaIndividual2.bt}
 \subsubsection{ProblemaAlimentosBT.java}
-\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/ProblemaAlimentosBT.java}
+\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/bt/ProblemaAlimentosBT.java}
 \subsubsection{TestAlimentosBT.java}
-\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/TestAlimentosBT.java}
+\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/bt/TestAlimentosBT.java}
+
+
+
+
 
 
 
 \subsection{Volcado de pantalla de los resultados obtenidos por cada prueba realizada}
+\subsubsection{PD}
 \begin{figure}[H]
   \centering
-  \includegraphics{btSinfiltro.png}
+  \includegraphics[scale=0.5]{btSinfiltro.png}
+  \caption{TODO}
+  \label{fig:pdsincota}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{btCota.png}
+  \caption{TODO}
+  \label{fig:pdconcota}
+\end{figure}
+
+
+\subsubsection{BT}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{btSinfiltro.png}
   \caption{Volcado de pantalla de la terminal al ejecutar la clase TestAlimentosBT}
-  \label{fig:pli}
+  \label{fig:btsincota}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{btCota.png}
+  \caption{Volcado de pantalla de la terminal al ejecutar la clase TestAlimentosBT especificando la opcion de cotas}
+  \label{fig:btconcota}
 \end{figure}
 
 \subsection{Código fuente y licencia}
