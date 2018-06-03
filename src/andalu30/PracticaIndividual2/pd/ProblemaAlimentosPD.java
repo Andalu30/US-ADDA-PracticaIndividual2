@@ -1,56 +1,70 @@
 package andalu30.PracticaIndividual2.pd;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import andalu30.PracticaIndividual2.bt.SolucionAlimentos;
 import andalu30.PracticaIndividual2.common.IngredienteActivo;
 import andalu30.PracticaIndividual2.common.Nutriente;
 import andalu30.PracticaIndividual2.common.ProblemaAlimentos;
+import andalu30.PracticaIndividual2.common.SolucionAlimentos;
 import us.lsi.pd.AlgoritmoPD.Sp;
 import us.lsi.pd.ProblemaPD;
 import us.lsi.pd.ProblemaPDR;
-import us.lsi.pd.mochila.ProblemaMochilaPD;
 
-public class ProblemaAlimentosPD implements ProblemaPDR<andalu30.PracticaIndividual2.common.SolucionAlimentos ,Integer>{
+
+public class ProblemaAlimentosPD implements ProblemaPDR<SolucionAlimentos ,Integer>{
 
 	//Propiedades
 	private int index;
 	private List<IngredienteActivo> listaIngredientes;
 	private List<Nutriente> listaNutrientes;
 	private List<Double> minimos;
+	private List<Integer> memoriaAlternativas;
 	private Double costeAcumulado;
 	
 
 	
-	//Constructor	
-	
-	
-	public static ProblemaAlimentosPD create(List<IngredienteActivo> ling, List<Nutriente> nutr) {
-		return new ProblemaAlimentosPD(0, ling, nutr);
+	//Constructores (Basados en Afinidad)
+
+	public static ProblemaAlimentosPD create(Integer index, List<IngredienteActivo> lising, List<Nutriente> nuts) {
+		return new ProblemaAlimentosPD(index,
+									   lising,
+									   nuts,
+									   nuts.stream().map(x -> new Double(x.getCantidadMinimaPorKilo())).collect(Collectors.toList())
+									   );
+	}
+
+	@SuppressWarnings("static-access")
+	public static ProblemaAlimentosPD create(ProblemaAlimentos pa) {
+		return new ProblemaAlimentosPD(0,
+										pa.getIngredientesActivosProblema(),
+										pa.getNutrientesProblema(),
+										pa.getNutrientesProblema().stream().map(x -> new Double(x.getCantidadMinimaPorKilo())).collect(Collectors.toList())
+										);
 	}
 	
-	public static ProblemaAlimentosPD create(ProblemaAlimentosPD p, Integer a) {
-		return new ProblemaAlimentosPD(p,a);
-	}
 	
-	private ProblemaAlimentosPD(int index, List<IngredienteActivo> ling, List<Nutriente> nut) {
+//	public static ProblemaAlimentosPD create(Integer index, List<IngredienteActivo> ling, List<Nutriente> nuts,
+//			List<Double> minimos) {
+//		return new ProblemaAlimentosPD(index, ling, nuts, minimos);
+//	}
+	
+	private ProblemaAlimentosPD(Integer index, List<IngredienteActivo> ling, List<Nutriente> nuts,
+			List<Double> minimos) {
+		super();
 		this.index = index;
 		this.listaIngredientes = ling;
-		this.listaNutrientes = nut;
-		this.minimos = this.listaNutrientes.stream().map(x -> new Double(x.getCantidadMinimaPorKilo())).collect(Collectors.toList());
+		this.listaNutrientes = nuts;
+		this.minimos = minimos;
+		this.memoriaAlternativas = new ArrayList<>();
 	}
 	
-	private ProblemaAlimentosPD(ProblemaAlimentosPD p, Integer a) {
-		this.index++;
-		this.listaIngredientes = p.listaIngredientes;
-		this.listaNutrientes = p.listaNutrientes;
-		this.minimos = this.listaNutrientes.stream().map(x -> new Double(x.getCantidadMinimaPorKilo())).collect(Collectors.toList());
-	}
+	
+	
+	
+	
 	
 	
 	//Metodos
@@ -61,12 +75,13 @@ public class ProblemaAlimentosPD implements ProblemaPDR<andalu30.PracticaIndivid
 
 	@Override
 	public int size() {
+		System.out.println(listaNutrientes.size()-this.index);
 		return this.listaNutrientes.size()-this.index;
 	}
 	
 	@Override
 	public boolean esCasoBase() {
-		System.out.println("Caso base: "+(this.index==this.listaIngredientes.size()));
+		System.out.println("Es caso base: "+(this.index==this.listaIngredientes.size()));
 		return this.index==this.listaIngredientes.size();
 	}
 
@@ -81,8 +96,20 @@ public class ProblemaAlimentosPD implements ProblemaPDR<andalu30.PracticaIndivid
 	}
 	
 	@Override
-	public ProblemaPD<andalu30.PracticaIndividual2.common.SolucionAlimentos, Integer> getSubProblema(Integer a) {
-		return ProblemaAlimentosPD.create(this, a);
+	public ProblemaPD<SolucionAlimentos, Integer> getSubProblema(Integer a) {
+		
+		//Añadir la alternativa a la memoria
+		this.memoriaAlternativas.add(a);
+		
+		System.out.println("DEBUG - memoriaAlternativas: "+this.memoriaAlternativas);
+		
+		//Restar de los minimos
+		for (int i = 0; i < this.listaNutrientes.size(); i++) {
+			this.minimos.set(i, this.minimos.get(i)-a*this.listaIngredientes.get(index).getCantidadNutrientes().get(i));
+		}
+		System.out.println("Minimos: "+this.minimos);
+		this.index++;
+		return this;					
 	}
 	
 	@Override
@@ -92,36 +119,45 @@ public class ProblemaAlimentosPD implements ProblemaPDR<andalu30.PracticaIndivid
 	}
 	
 	@Override
-	public List<Integer> getAlternativas() {
-		List<Integer> ls = IntStream.rangeClosed(1, 1000)
-				.filter(x->this.constraints(x))
+	public List<Integer> getAlternativas() {		
+		List<Integer> ret=IntStream.range(0, 1000)
+				.filter(x -> cumpleRestricciones(x))
 				.boxed()
-				.collect(Collectors.toList());
-		Collections.reverse(ls); //No se porque pero en mochila aparece asi.
-		return ls;
-	}
+				.collect(Collectors.toList());		
+		return ret;
+}
 	
 	private Boolean cumpleRestricciones(Integer a) {
 		return this.minimos.stream().allMatch(x -> x<0.);
 	}
 	
 	@Override
-	public andalu30.PracticaIndividual2.common.SolucionAlimentos getSolucionReconstruidaCasoBase(Sp<Integer> sp) {
+	public SolucionAlimentos getSolucionReconstruidaCasoBase(Sp<Integer> sp) {
 		List<Integer> a = new ArrayList<>();
-		return andalu30.PracticaIndividual2.common.SolucionAlimentos.create(a, this.listaIngredientes);
+		return SolucionAlimentos.create(a, this.listaIngredientes);
+	}
+	
+	@Override
+	public SolucionAlimentos getSolucionReconstruidaCasoRecursivo(Sp<Integer> sp, SolucionAlimentos s) {
+		List<Integer> aux = s.getGramos();
+		aux.set(index, sp.alternativa);
+		SolucionAlimentos res = SolucionAlimentos.create(aux, this.listaIngredientes);		
+		return res;
 	}
 
 	@Override
-	public andalu30.PracticaIndividual2.common.SolucionAlimentos getSolucionReconstruidaCasoRecursivo(Sp<Integer> sp, SolucionAlimentos s){
-	//TODO: Basandome en el ProblemaAfinidad.
+	public Double getObjetivoEstimado(Integer a) {
+		return this.costeAcumulado+a*this.listaIngredientes.get(index).getCoste();	
 	}
-	
-	
-	
-	
-	//TODO:Por aqui!!
 
-
+	@Override
+	public Double getObjetivo() {
+		Double r = null;
+		if (this.esCasoBase()) {
+			r = this.costeAcumulado;
+		}
+		return r;
+	} 
 	
 		
 	
@@ -137,6 +173,7 @@ public class ProblemaAlimentosPD implements ProblemaPDR<andalu30.PracticaIndivid
 		result = prime * result + ((minimos == null) ? 0 : minimos.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -165,6 +202,7 @@ public class ProblemaAlimentosPD implements ProblemaPDR<andalu30.PracticaIndivid
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "ProblemaAlimentosPD [listaIngredientes=" + listaIngredientes + ", listaNutrientes=" + listaNutrientes

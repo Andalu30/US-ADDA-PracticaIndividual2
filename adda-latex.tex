@@ -36,7 +36,7 @@ contener una cantidad mínima de nutrientes concreta.
   · listaIngredientes\\
   · listaNutrientes\\
   · minimos
-  
+
 \item Restricciones:\\
   · minimos.stream().allMatch(x -> x<0.)
 \item Solución óptima:\\
@@ -80,7 +80,7 @@ contener una cantidad mínima de nutrientes concreta.
   \item Objetivo:\\
         · min c
   \item Alternativas:\\
-        · A = {a \in [0,1000]}
+        · A = {a \in [1,1000]}
   \item Instanciación:\\
         · (0,0)
   \item ProblemaGeneralizado:\\
@@ -88,15 +88,13 @@ contener una cantidad mínima de nutrientes concreta.
   \item Caso base:
         · i=numeroIngredientes
   \item Solución casos base:
-        · (?, j+a*costeIngrediente)
+        · (?, 0.)
   \item Numero de subproblemas:
         · 1000
   \item Subproblemas:
         · $p = (i,j) \rightarrow p_1 = (i+1, j+a*costeIngrediente)$
   \item Esquema recursivo:\\
-        · sr(i, coste) =
-
-        $\begin{cases}
+        · sr(i, coste) = $\begin{cases}
         (?,0)  &\mbox{i = numeroIngredientes}\\
         sA(cS, sp(p_a)) &\mbox{e.c.o.c}\\
 
@@ -107,7 +105,6 @@ contener una cantidad mínima de nutrientes concreta.
   \item sP:\\
         · Elegir la alternativa con menor coste.
   \item Solucion reconstruida:
-  \item Complejidad:
 
 
 \end{itemize}
