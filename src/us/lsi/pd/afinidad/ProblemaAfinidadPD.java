@@ -83,7 +83,8 @@ public class ProblemaAfinidadPD  implements ProblemaPDR<SolucionAfinidad, Intege
 	}
 
 	@Override
-	public boolean esCasoBase() {		
+	public boolean esCasoBase() {
+		System.out.println(indexCliente==ProblemaAfinidad.clientes.size());
 		return indexCliente==ProblemaAfinidad.clientes.size();
 	}
 
@@ -103,11 +104,11 @@ public class ProblemaAfinidadPD  implements ProblemaPDR<SolucionAfinidad, Intege
 		//Actualiza la afinidad. +1 si el trabajador a es afin al cliente index 
 		 Integer afinidadAcum = this.afinidadAcum +(this.getTrabajadoresAfinesACliente(indexCliente).contains(a)?1:0);		
 				
-		//añade al trabajador en la franja del cliente				
+		//aï¿½ade al trabajador en la franja del cliente				
 		Map<Integer, Set<Integer>> trabajadoresOcupadosEnFranja= new HashMap<>(this.trabajadoresOcupadosEnFranja);
 		addTrabajadorOcupadoEnFranjaDeCliente(indexCliente,trabajadoresOcupadosEnFranja,a);
 				
-		//añade al trabajador a un cliente más
+		//aï¿½ade al trabajador a un cliente mï¿½s
 		List<Integer> numClientes=new ArrayList<>(numClientesPorTrabajador);
 		numClientes.set(a,numClientes.get(a)+1);
 		Integer indexCliente = this.indexCliente+1;
@@ -139,13 +140,15 @@ public class ProblemaAfinidadPD  implements ProblemaPDR<SolucionAfinidad, Intege
 	}
 
 	@Override
-	public SolucionAfinidad getSolucionReconstruidaCasoBase(Sp<Integer> sp) {		
+	public SolucionAfinidad getSolucionReconstruidaCasoBase(Sp<Integer> sp) {	
+		System.out.println("Solucion reconstruida caso base");
 		return SolucionAfinidad.create(new HashMap<>(),0);
 	}
 
 	@Override
 	public SolucionAfinidad getSolucionReconstruidaCasoRecursivo(Sp<Integer> sp, SolucionAfinidad s) {
 
+		System.out.println("Solucion reconstruida caso recursivo: "+s);
 		Map<String, String> msol = s.getAsignacion();
 		msol.put(ProblemaAfinidad.clientes.get(indexCliente).nombre,
 				ProblemaAfinidad.trabajadores.get(sp.alternativa));
@@ -168,7 +171,6 @@ public class ProblemaAfinidadPD  implements ProblemaPDR<SolucionAfinidad, Intege
 		}
 		return r;
 	}	
-
 
 
 	@Override
@@ -216,10 +218,7 @@ public class ProblemaAfinidadPD  implements ProblemaPDR<SolucionAfinidad, Intege
 		return true;
 	}
 
-	//	@Override
-//	public String toString() {
-//		return "["+indexCliente + ", "+ numClientesPorTrabajador + ", " + afinidadAcum + ", "+ trabajadoresOcupadosEnFranja +"]";
-//	}
+
 	@Override
 	public String toString() {
 		return "["+indexCliente + ", "+ afinidadAcum +"]";

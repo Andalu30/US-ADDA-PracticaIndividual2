@@ -104,8 +104,10 @@ contener una cantidad mínima de nutrientes concreta.
         · sA(A, (a',v')) = (A,v')
   \item sP:\\
         · Elegir la alternativa con menor coste.
-  \item Solucion reconstruida:
-
+  \item Solucion reconstruida:\\
+        · List<Integer> res = new ArrayList<>();\\
+        · memoriaAlternativas.stream().foreach(x -> res.add(x))\\
+        · return SolucionAlimentos.create(res);\\
 
 \end{itemize}
 
@@ -119,9 +121,21 @@ y que la cantidadNutrientes y coste se escriben en una linea distinta por cada i
 \inputminted[fontsize=\footnotesize,breaklines]{text}{ficheros/alimentos.txt}
 
 \subsection{Desarrolle un proyecto que resuelva el problema especificado por la técnica sin hacer uso en principio de una función de cota. Dicho proyecto debe incluir un test de prueba que genere la solución para el escenario previamente descrio en el enunciado.}
-\subsection{El test de prueba debe generar el archivo "GrafoAlimentos.gv" (grafo and/or relacionado de la busqueda llevada a cabo) que debe entregar incluido en el proyecto y en la memoria.}
-\subsection{Modifique la solucion anterior para realizar una función de cota adecuada al problema a resolver. Ejecute de nuevo el test de prieba sobre el proyecto modificado e indique qué solución obtiene para el problema del escenario indicado previamente en el enunciado. el test de prueba debe generar el archivo "GrafoAlimentosFiltro.gv" que debe entregar incluido en el proyecto y en la memoria.}
+La solución a este problema esta compuesta de la clase ProblemaAlimentosPD2 y TestAlimentosPD.\\
+El código especificado en los anexos, a pesar de estar practicamente implementado, no resuelve este problema, por lo que se puede considerar que no se ha cumplido el objetivo de esta actividad.
 
+\subsection{El test de prueba debe generar el archivo "GrafoAlimentos.gv" (grafo and/or relacionado de la busqueda llevada a cabo) que debe entregar incluido en el proyecto y en la memoria.}
+No se ha podido crear el archivo GrafoAlimentos.gv, ya que no se ha realizado correctamente el ejercicio anterior.
+
+\subsection{Modifique la solucion anterior para realizar una función de cota adecuada al problema a resolver. Ejecute de nuevo el test de prieba sobre el proyecto modificado e indique qué solución obtiene para el problema del escenario indicado previamente en el enunciado. el test de prueba debe generar el archivo "GrafoAlimentosFiltro.gv" que debe entregar incluido en el proyecto y en la memoria.}
+En el codigo fuente existen los métodos necesarios para poder ejecutar el algoritmo con cota. GetObjetivo y getObjetivoEstimado.\\
+Para utilizarlos habria que especificar:
+\begin{verbatim}
+AlgoritmoPD.calculaMetricas();
+AlgoritmoPD.isRandomize = true;
+AlgoritmoPD.conFiltro = true;
+\end{verbatim}
+en la clase TestAlimentosPD
 
 \section{Resolver el problema mediante BT, para ello:}
 \subsection{Completar la ficha de descripción de la solucion mediante BT.}
@@ -134,8 +148,7 @@ y que la cantidadNutrientes y coste se escriben en una linea distinta por cada i
 · Determinar cuantos gramos de cada ingrediente activo es necesario incluir por kilo
 de alimento para minimizar costes, teniendo en cuenta que cada kilo de alimento debe
 contener una cantidad mínima de nutrientes concreta.
-\item Técnica:\\
-      · Vuelta Atrás
+\item Técnica:\\      · Vuelta Atrás
 \item Tipos:\\
       · S - SolucionAlimentos\\
       · A - Integer \in [0,1000] (El numero de gramos que se seleccionan de cada ingrediente)
@@ -198,6 +211,10 @@ Se puede encontrar el volcado de pantalla de esta solucion en la figura de la p�
 \inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/common/ProblemaAlimentos.java}
 
 \subsection{Paquete andalu30.PracticaIndividual2.pd}
+\subsubsection{ProblemaAlimentosPD2.java}
+\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/pd/ProblemaAlimentosPD2.java}
+\subsubsection{TestAlimentosPD.java}
+\inputminted[fontsize=\footnotesize,breaklines]{java}{src/andalu30/PracticaIndividual2/pd/TestAlimentosPD.java}
 
 
 
@@ -217,14 +234,14 @@ Se puede encontrar el volcado de pantalla de esta solucion en la figura de la p�
 \subsubsection{PD}
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{btSinfiltro.png}
-  \caption{TODO}
+  \includegraphics[scale=0.5]{pd.png}
+  \caption{Solución incorrecta del algoritmo PD}
   \label{fig:pdsincota}
 \end{figure}
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{btCota.png}
-  \caption{TODO}
+  \includegraphics[scale=0.5]{pd.png}
+  \caption{Solución incorrecta del algoritmo PD con cota}
   \label{fig:pdconcota}
 \end{figure}
 
@@ -246,7 +263,7 @@ Se puede encontrar el volcado de pantalla de esta solucion en la figura de la p�
 \subsection{Código fuente y licencia}
 Todo el código fuente del trabajo se podrá encontrar en \url{www.github.com/Andalu30/US-ADDA-PracticaIndividual2/}
 a partir del lunes 4 de junio de 2018, fecha limite de entrega de este trabajo.
-No se recomienda el uso de la totalidad o de parte de este trabajo en caso de que no se cambie la actividad en años posteriores debido a que la universidad usa software de detección de copias.
+No se recomienda el uso de la totalidad o de parte de este trabajo en caso de que no se cambie la actividad en años posteriores debido a que la universidad usa software de detección de copias. Además, este trabajo no está realizado correctamente, la parte de PD no funciona correctamente.
 El contenido de este trabajo es libre y se encuentra licenciado bajo una licencia GPL v3.\\
 
 \begin{minted}{text}

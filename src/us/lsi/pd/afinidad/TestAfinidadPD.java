@@ -18,7 +18,9 @@ public class TestAfinidadPD {
 		AlgoritmoPD<SolucionAfinidad, Integer> a= Algoritmos.createPD(p);
 		a.ejecuta();
 		a.showAllGraph("ficheros/PDAfinidad_22.gv","Afinidad",p);
-		//recuperasolución		
+		
+		
+		//recuperasoluciï¿½n		
 		System.out.println(a.getSolucion(p));
 		System.out.println(AbstractAlgoritmo.metricas);
 		System.out.println(a.getSolucionesParciales().size()+","+a.getNumeroDeProblemas());

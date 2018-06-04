@@ -15,27 +15,29 @@ public class TestAlimentosPD {
 		
 		String path = "ficheros/alimentos.txt";
 		
-		
+		System.out.println("Generando problema a partir del archivo 'alimentos.txt'");
 		ProblemaAlimentos pa = ProblemaAlimentos.create(path);
-		System.out.println("Problema Alimentos: "+pa);
 		
 		
 		List<Double> minimos = pa.getNutrientesProblema().stream().map(x -> new Double(x.getCantidadMinimaPorKilo())).collect(Collectors.toList());
 		
 		ProblemaAlimentosPD2 p = ProblemaAlimentosPD2.create(0, pa.getIngredientesActivosProblema(), pa.getNutrientesProblema(),minimos);								
-		System.out.println("ProblemaAlimentosPD2: "+p);
 		
 		AlgoritmoPD.calculaMetricas();
 		AlgoritmoPD.isRandomize = false;
 		AlgoritmoPD.conFiltro = false;
 
-		
+		System.out.println("Generando AlgoritmoBT a partir del problema");
 		AlgoritmoPD<SolucionAlimentos, Integer> a = Algoritmos.createPD(p);
-		System.out.println("Algoritmo PD: "+a+"\n");
+		
+		if (AlgoritmoPD.conFiltro==true) {
+			System.out.println("Ejecutando el algoritmo con cota: Por favor, espere.");
+		}else {
+			System.out.println("Ejecutando el algoritmo: Por favor, espere.");			
+		}
 		
 		a.ejecuta();
 		
-		System.out.println("Algoritmo ejecutado");
 		//a.showAllGraph("ficheros/pruebaAlimentosSinFiltro.gv", "Alimentos", p);
 	
 		List<Integer> solucionAlgoritmo = a.getSolucion(p).getGramos();

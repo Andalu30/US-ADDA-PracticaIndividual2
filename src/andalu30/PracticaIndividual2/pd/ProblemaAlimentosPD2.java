@@ -58,8 +58,7 @@ public class ProblemaAlimentosPD2  implements ProblemaPDR<SolucionAlimentos, Int
 
 	@Override
 	public boolean esCasoBase() {
-									System.out.println("Caso base: "+(this.ingredientesActivos.size()==this.indexingrediente));
-		return this.ingredientesActivos.size()==this.indexingrediente;
+		return (this.ingredientesActivos.size()==this.indexingrediente);
 	}
 
 	@Override
@@ -81,14 +80,17 @@ public class ProblemaAlimentosPD2  implements ProblemaPDR<SolucionAlimentos, Int
 		return ret;
 	}
 
-
+	
+	
 	@Override
 	public ProblemaPD<SolucionAlimentos, Integer> getSubProblema(Integer a) {
 		
 		//Memoria alternativas
 		this.memoriaAlternativas.set(indexingrediente, a);
-										System.out.println(this.memoriaAlternativas);
-										
+		
+		//Coste
+		//this.costeAcumulado += a*this.ingredientesActivos.get(this.indexingrediente).getCoste();
+		
 		return ProblemaAlimentosPD2.create(this.indexingrediente+1,this.ingredientesActivos,this.nutrientes,this.minimos,this.memoriaAlternativas);
 	}
 	
@@ -101,22 +103,62 @@ public class ProblemaAlimentosPD2  implements ProblemaPDR<SolucionAlimentos, Int
 	
 	@Override
 	public SolucionAlimentos getSolucionReconstruidaCasoBase(Sp<Integer> sp) {
-		System.out.println("SolucionReconstruidaCasoBase");
-		return SolucionAlimentos.create(new ArrayList<>(),this.ingredientesActivos);
+		
+		List<Integer> gramosceros = new ArrayList<>();
+		for (int i = 0; i < this.ingredientesActivos.size(); i++) {
+			gramosceros.add(0);
+		}
+		
+		SolucionAlimentos res = SolucionAlimentos.create(gramosceros,this.ingredientesActivos);
+		//System.out.println(res);
+		return res;
 	}
 
+	
 	@Override
 	public SolucionAlimentos getSolucionReconstruidaCasoRecursivo(Sp<Integer> sp, SolucionAlimentos ls) {
-		System.out.println("SolucionReconstruidaCasoRecursivo");
-
 		List<Integer> gramos = this.memoriaAlternativas;
 		gramos.set(indexingrediente, sp.alternativa);
 		
-		
-		return SolucionAlimentos.create(gramos, this.ingredientesActivos) ;
+		SolucionAlimentos res =  SolucionAlimentos.create(gramos, this.ingredientesActivos) ;
+//		System.out.println(res);
+//		
+//		if (! gramosminimos(gramos, this.minimos)) {
+//			return null;
+//		}
+		return res;		
 	}
 	
 	
+//	private boolean gramosminimos(List<Integer> gramos, List<Double> minimos) {
+//		boolean res = false;
+//		for (int i = 0; i < gramos.size(); i++) {
+//			minimos.set(i, minimos.get(i)-this.memoriaAlternativas.get(i)*this.ingredientesActivos.get(i).getCoste());
+//		}
+//		System.out.println(minimos);
+//		if (minimos.stream().allMatch(x -> x<0)) {
+//			res = true;
+//		}
+//		return res;
+//	}
+	
+	
+	
+	
+	
+	@Override
+	public Double getObjetivoEstimado(Integer a) {
+		return this.costeAcumulado+a*this.ingredientesActivos.get(this.indexingrediente).getCoste();	
+	}
+
+	@Override
+	public Double getObjetivo() {
+		Double r = null;
+		if (this.esCasoBase()) {
+			r = this.costeAcumulado;
+		}
+		return r;
+}
 	
 	
 	

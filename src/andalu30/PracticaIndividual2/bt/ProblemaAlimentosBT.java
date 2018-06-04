@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import andalu30.PracticaIndividual2.common.IngredienteActivo;
 import andalu30.PracticaIndividual2.common.Nutriente;
 import andalu30.PracticaIndividual2.common.ProblemaAlimentos;
+import andalu30.PracticaIndividual2.common.SolucionAlimentos;
 import us.lsi.bt.EstadoBT;
 
 public class ProblemaAlimentosBT implements EstadoBT<SolucionAlimentos,Integer>{

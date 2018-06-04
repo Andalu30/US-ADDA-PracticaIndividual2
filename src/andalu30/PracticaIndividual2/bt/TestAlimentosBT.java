@@ -3,6 +3,7 @@ package andalu30.PracticaIndividual2.bt;
 import java.util.List;
 
 import andalu30.PracticaIndividual2.common.ProblemaAlimentos;
+import andalu30.PracticaIndividual2.common.SolucionAlimentos;
 import us.lsi.algoritmos.Algoritmos;
 import us.lsi.bt.AlgoritmoBT;
 
@@ -13,8 +14,8 @@ public class TestAlimentosBT {
 		AlgoritmoBT.calculaMetricas();
 		AlgoritmoBT.numeroDeSoluciones = 1;
 		
-		AlgoritmoBT.conFiltro = false;
-		AlgoritmoBT.isRandomize = false;
+		AlgoritmoBT.conFiltro = true;
+		AlgoritmoBT.isRandomize = true;
 		
 		
 		//Creacion de problemas y algoritmo
